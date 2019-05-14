@@ -1,5 +1,6 @@
 package khoapham.ptp.phamtanphat.intentchonhinhanh;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView imgHinhgoc,imgHinhchon;
     String [] mangtenhinh;
     int idHinhgoc;
+    int Request_Code_Hinhanh = 123;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +34,8 @@ public class MainActivity extends AppCompatActivity {
         imgHinhchon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MainActivity.this,DanhsachthucungActivity.class);
+                startActivityForResult(intent , Request_Code_Hinhanh);
             }
         });
     }
