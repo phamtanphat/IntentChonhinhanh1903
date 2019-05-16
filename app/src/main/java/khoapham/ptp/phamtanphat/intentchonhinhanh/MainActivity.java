@@ -1,12 +1,15 @@
 package khoapham.ptp.phamtanphat.intentchonhinhanh;
 
 import android.content.Intent;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -29,9 +32,7 @@ public class MainActivity extends AppCompatActivity {
         mangtenhinh = getResources().getStringArray(R.array.arrayanimal);
 //        Random random = new Random();
 //        int index = random.nextInt(mangtenhinh.length);
-        Collections.shuffle(Arrays.asList(mangtenhinh));
-        idHinhgoc = getResources().getIdentifier(mangtenhinh[0],"drawable",getPackageName());
-        imgHinhgoc.setImageResource(idHinhgoc);
+        getRandomImage();
         imgHinhchon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,8 +48,27 @@ public class MainActivity extends AppCompatActivity {
             int idhinhchon = data.getIntExtra("idhinhchon",Integer.MIN_VALUE);
             if (idhinhchon != Integer.MIN_VALUE){
                 imgHinhchon.setImageResource(idhinhchon);
+                if (idhinhchon == idHinhgoc){
+                    Toast.makeText(this, "Chinh xac!!", Toast.LENGTH_SHORT).show();
+                    imgHinhchon.setEnabled(false);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            getRandomImage();
+                            imgHinhchon.setEnabled(true);
+                        }
+                    },2000);
+
+                }else{
+                    Toast.makeText(this, "Sai roi!!", Toast.LENGTH_SHORT).show();
+                }
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+    private void getRandomImage(){
+        Collections.shuffle(Arrays.asList(mangtenhinh));
+        idHinhgoc = getResources().getIdentifier(mangtenhinh[0],"drawable",getPackageName());
+        imgHinhgoc.setImageResource(idHinhgoc);
     }
 }
