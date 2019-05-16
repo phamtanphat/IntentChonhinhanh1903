@@ -1,6 +1,7 @@
 package khoapham.ptp.phamtanphat.intentchonhinhanh;
 
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -38,5 +39,16 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent , Request_Code_Hinhanh);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode == Request_Code_Hinhanh && resultCode == RESULT_OK && data != null){
+            int idhinhchon = data.getIntExtra("idhinhchon",Integer.MIN_VALUE);
+            if (idhinhchon != Integer.MIN_VALUE){
+                imgHinhchon.setImageResource(idhinhchon);
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

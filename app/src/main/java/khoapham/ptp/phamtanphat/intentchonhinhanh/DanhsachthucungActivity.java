@@ -1,5 +1,6 @@
 package khoapham.ptp.phamtanphat.intentchonhinhanh;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -41,6 +42,15 @@ public class DanhsachthucungActivity extends AppCompatActivity {
                     }else{
                         final int idHinh = getResources().getIdentifier(mangtenthucung[vitri],"drawable",getPackageName());
                         imageView.setImageResource(idHinh);
+                        imageView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(DanhsachthucungActivity.this,MainActivity.class);
+                                intent.putExtra("idhinhchon",idHinh);
+                                setResult(RESULT_OK,intent);
+                                finish();
+                            }
+                        });
 
                     }
                     tableRow.addView(imageView);
