@@ -1,6 +1,7 @@
 package khoapham.ptp.phamtanphat.intentchonhinhanh;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Arrays;
@@ -18,9 +20,12 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
 
     ImageView imgHinhgoc,imgHinhchon;
+    TextView txtDiem;
     String [] mangtenhinh;
     int idHinhgoc;
     int Request_Code_Hinhanh = 123;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +33,14 @@ public class MainActivity extends AppCompatActivity {
 
         imgHinhchon = findViewById(R.id.imageviewHinhchon);
         imgHinhgoc = findViewById(R.id.imageviewHinhgoc);
+        txtDiem = findViewById(R.id.textviewdiem);
+
+        sharedPreferences = getSharedPreferences("quanlydiem",MODE_PRIVATE);
+        String chuoi = sharedPreferences.getString("chuoi",null);
+        Log.d("BBB",chuoi ) ;
+//        editor = sharedPreferences.edit();
+//        editor.putString("chuoi","Xin chao sharedPreference");
+//        editor.commit();
 
         mangtenhinh = getResources().getStringArray(R.array.arrayanimal);
 //        Random random = new Random();
