@@ -1,10 +1,12 @@
 package khoapham.ptp.phamtanphat.intentchonhinhanh;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -88,12 +90,33 @@ public class MainActivity extends AppCompatActivity {
 
                 }else{
                     diemdangchoi -= 10;
-                    if (diemdangchoi > 0){
+                    Log.d("BBB",diemdangchoi + "");
+                    if (diemdangchoi >= 0){
                         editor.putInt("diemso",diemdangchoi);
                         txtDiem.setText(diemdangchoi + "");
                         editor.commit();
                     }else{
 
+                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                        builder.setMessage("Ban muon choi lai hay khong?");
+                        builder.setCancelable(false);
+                        builder.setPositiveButton("Co", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                diemdangchoi = 0;
+                                editor.putInt("diemso",diemdangchoi);
+                                txtDiem.setText(diemdangchoi + "");
+                                editor.commit();
+                            }
+                        });
+                        builder.setNegativeButton("Khong", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                editor.clear();
+                                finish();
+                            }
+                        });
+                        builder.show();
                     }
 
                     Toast.makeText(this, "Sai roi!!", Toast.LENGTH_SHORT).show();
