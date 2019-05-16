@@ -29,22 +29,26 @@ public class DanhsachthucungActivity extends AppCompatActivity {
         // Số cột 3(Imageview)
         int sodong = 6;
         int socot = 3;
-        for (int i = 1 ; i <= sodong ; i++){
-            TableRow tableRow = new TableRow(this);
-            for (int y = 1 ; y <= socot ;y++){
-                ImageView imageView = new ImageView(this);
-                int vitri = socot * (i - 1) + y -1;
-                if (mangtenthucung.length == vitri){
-                    imageView.setImageResource(android.R.color.transparent);
-                }else{
-                    final int idHinh = getResources().getIdentifier(mangtenthucung[vitri],"drawable",getPackageName());
-                    imageView.setImageResource(idHinh);
+        if (mangtenthucung.length % 3 == 2 || mangtenthucung.length % 3 == 1 || mangtenthucung.length % 3 == 0){
+            for (int i = 1 ; i <= Math.ceil((float)mangtenthucung.length /3) ; i++){
+                TableRow tableRow = new TableRow(this);
+                for (int y = 1 ; y <= socot ;y++){
+                    ImageView imageView = new ImageView(this);
+                    int vitri = socot * (i - 1) + y -1;
+                    if (mangtenthucung.length == vitri){
+                        imageView.setImageResource(android.R.color.transparent);
+                        imageView.setVisibility(View.GONE);
+                    }else{
+                        final int idHinh = getResources().getIdentifier(mangtenthucung[vitri],"drawable",getPackageName());
+                        imageView.setImageResource(idHinh);
+
+                    }
+                    tableRow.addView(imageView);
 
                 }
-                tableRow.addView(imageView);
-
+                tableLayout.addView(tableRow);
             }
-            tableLayout.addView(tableRow);
         }
+
     }
 }
