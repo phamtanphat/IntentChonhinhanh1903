@@ -36,10 +36,15 @@ public class MainActivity extends AppCompatActivity {
         txtDiem = findViewById(R.id.textviewdiem);
 
         sharedPreferences = getSharedPreferences("quanlydiem",MODE_PRIVATE);
-        String chuoi = sharedPreferences.getString("chuoi",null);
-        Log.d("BBB",chuoi ) ;
+        try {
+            String chuoi = sharedPreferences.getString("chuoi",null);
+            if (chuoi == null) throw new Exception("loi");
+        }catch (Exception e){
+            Log.d("CCC",e.getMessage());
+        }
+
 //        editor = sharedPreferences.edit();
-//        editor.putString("chuoi","Xin chao sharedPreference");
+//        editor.remove("chuoi");
 //        editor.commit();
 
         mangtenhinh = getResources().getStringArray(R.array.arrayanimal);
