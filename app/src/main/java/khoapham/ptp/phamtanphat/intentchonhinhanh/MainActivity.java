@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     int idHinhgoc;
     int Request_Code_Hinhanh = 123;
     SharedPreferences sharedPreferences;
+
+    int diemdangchoi = 0;
     SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,16 +38,19 @@ public class MainActivity extends AppCompatActivity {
         txtDiem = findViewById(R.id.textviewdiem);
 
         sharedPreferences = getSharedPreferences("quanlydiem",MODE_PRIVATE);
-        try {
-            String chuoi = sharedPreferences.getString("chuoi",null);
-            if (chuoi == null) throw new Exception("loi");
-        }catch (Exception e){
-            Log.d("CCC",e.getMessage());
-        }
+//        try {
+//            String chuoi = sharedPreferences.getString("chuoi",null);
+//            if (chuoi == null) throw new Exception("loi");
+//        }catch (Exception e){
+//            Log.d("CCC",e.getMessage());
+//        }
 
 //        editor = sharedPreferences.edit();
 //        editor.remove("chuoi");
 //        editor.commit();
+        editor = sharedPreferences.edit();
+        diemdangchoi = sharedPreferences.getInt("diemso",0);
+        txtDiem.setText(diemdangchoi + "");
 
         mangtenhinh = getResources().getStringArray(R.array.arrayanimal);
 //        Random random = new Random();
@@ -72,14 +77,28 @@ public class MainActivity extends AppCompatActivity {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
+                            diemdangchoi += 10;
+                            editor.putInt("diemso",diemdangchoi);
                             getRandomImage();
                             imgHinhchon.setEnabled(true);
+                            txtDiem.setText(diemdangchoi + "");
+                            editor.commit();
                         }
                     },2000);
 
                 }else{
+                    diemdangchoi -= 10;
+                    if (diemdangchoi > 0){
+                        editor.putInt("diemso",diemdangchoi);
+                        txtDiem.setText(diemdangchoi + "");
+                        editor.commit();
+                    }else{
+
+                    }
+
                     Toast.makeText(this, "Sai roi!!", Toast.LENGTH_SHORT).show();
                 }
+
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
