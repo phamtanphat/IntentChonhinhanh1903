@@ -7,6 +7,16 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <TextView
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:textColor="#f20"
+        android:textSize="25sp"
+        android:text="0"
+        android:id="@+id/textviewdiem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <ImageView
         android:id="@+id/imageviewHinhgoc"
         android:layout_marginTop="10dp"
