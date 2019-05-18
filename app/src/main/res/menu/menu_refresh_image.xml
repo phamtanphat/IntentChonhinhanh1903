@@ -3,28 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
    <!--menucap 1-->
     <item
-        app:showAsAction="collapseActionView"
+        app:showAsAction="always"
         android:icon="@drawable/refresh"
-        android:title="Setting"
-        android:id="@+id/item_setting"
-        />
-    <item
-        android:id="@+id/item_share"
-        android:title="Share"
-        >
-        <menu>
-            <item
-                android:icon="@drawable/refresh"
-                android:id="@+id/item_facebook"
-                android:title="Facebook">
+        android:title="Refresh"
+        android:id="@+id/item_setting" />
 
-            </item>
-            <item
-                android:icon="@drawable/refresh"
-                android:id="@+id/item_github"
-                android:title="Github">
-
-            </item>
-        </menu>
-    </item>
 </menu>

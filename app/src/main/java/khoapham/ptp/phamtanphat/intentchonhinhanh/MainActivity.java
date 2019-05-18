@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -128,6 +129,43 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_refresh_image,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.item_setting){
+            diemdangchoi -= 10;
+            if (diemdangchoi >= 0){
+                getRandomImage();
+                editor.putInt("diemso",diemdangchoi);
+                txtDiem.setText(diemdangchoi + "");
+                editor.commit();
+            }else{
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("Ban muon choi lai hay khong?");
+                builder.setCancelable(false);
+                builder.setPositiveButton("Co", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        diemdangchoi = 0;
+                        editor.putInt("diemso",diemdangchoi);
+                        txtDiem.setText(diemdangchoi + "");
+                        editor.commit();
+                    }
+                });
+                builder.setNegativeButton("Khong", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        editor.clear();
+                        finish();
+                    }
+                });
+                builder.show();
+            }
+            Toast.makeText(this, "Sai roi!!", Toast.LENGTH_SHORT).show();
+
+        }
         return true;
     }
 
