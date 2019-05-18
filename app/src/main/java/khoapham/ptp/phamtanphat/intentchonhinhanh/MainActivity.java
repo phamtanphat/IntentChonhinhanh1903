@@ -96,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
                         txtDiem.setText(diemdangchoi + "");
                         editor.commit();
                     }else{
-
                         AlertDialog.Builder builder = new AlertDialog.Builder(this);
                         builder.setMessage("Ban muon choi lai hay khong?");
                         builder.setCancelable(false);
@@ -118,10 +117,8 @@ public class MainActivity extends AppCompatActivity {
                         });
                         builder.show();
                     }
-
                     Toast.makeText(this, "Sai roi!!", Toast.LENGTH_SHORT).show();
                 }
-
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
